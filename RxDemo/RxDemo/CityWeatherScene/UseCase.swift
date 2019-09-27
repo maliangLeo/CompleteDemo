@@ -49,10 +49,10 @@ extension UseCase : UseCaseProtocol {
                 //数据处理
                 self?.weatherRequestLoadingStream.accept(false)
                 self?.weatherRequestErrorStream.accept(nil)
-                guard let dict = try? JSONSerialization.jsonObject(with: response.data, options: .mutableContainers) as? [String:Any] else {
-                    return
-                }
-                let today: [String: AnyObject] = ((dict["result"]) as! [String: AnyObject])["today"] as! [String:AnyObject]
+                
+                let dict = try? response.mapJSON() as? [String:Any]
+                
+                let today: [String: AnyObject] = ((dict?["result"]) as! [String: AnyObject])["today"] as! [String:AnyObject]
                 let wea = today["weather"] as! String
                 let temp = today["temperature"] as! String
                 let description = today["dressing_advice"] as! String
