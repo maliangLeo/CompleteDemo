@@ -33,10 +33,11 @@ class ViewController: UIViewController {
     
     func bindTextSignal() {
         viewmodel.fetchWeather(city: city!)
-        viewmodel.getWeatherlableTextStream().bind(to: weatherLabel.rx.text).disposed(by: disposeBag)
-        viewmodel.getCityLabelTextStream().bind(to: cityLabel.rx.text).disposed(by: disposeBag)
-        viewmodel.getTemperatureLabelStream().bind(to: temperatureLabel.rx.text).disposed(by: disposeBag)
-        viewmodel.getDescriptionLabelStream().bind(to: desLabel.rx.text).disposed(by: disposeBag)
+        viewmodel.getWeatherModelStream().map{$0?.city}.bind(to: cityLabel.rx.text).disposed(by: disposeBag)
+        viewmodel.getWeatherModelStream().map{$0?.temperature}.bind(to: temperatureLabel.rx.text).disposed(by: disposeBag)
+        viewmodel.getWeatherModelStream().map{"天气\($0?.weather ?? "None")"}.bind(to: weatherLabel.rx.text).disposed(by: disposeBag)
+        viewmodel.getWeatherModelStream().map{$0?.des}.bind(to: desLabel.rx.text).disposed(by: disposeBag)
+        
         viewmodel.getLoadingStream().subscribe(onNext: {[weak self](result) in
             print("=======\(result)")
             if (result) {

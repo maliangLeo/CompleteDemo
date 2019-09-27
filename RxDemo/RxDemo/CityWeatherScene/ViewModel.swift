@@ -11,10 +11,7 @@ import RxSwift
 import RxCocoa
 
 protocol ViewModelProtocol {
-    func getWeatherlableTextStream() -> Observable<String>
-    func getCityLabelTextStream() -> Observable<String>
-    func getTemperatureLabelStream() -> Observable<String>
-    func getDescriptionLabelStream() -> Observable<String>
+    func getWeatherModelStream() -> Observable<Weather?>
     func getLoadingStream() -> Observable<Bool>
     func fetchWeather(city:String)
 }
@@ -22,12 +19,9 @@ protocol ViewModelProtocol {
 
 class ViewModel{
     
-    let weatherLabelTextStream : BehaviorRelay<String> = BehaviorRelay(value: "")
-    let cityLabelTextStream : BehaviorRelay<String> = BehaviorRelay(value: "")
-    let temperatureLabelTextStream : BehaviorRelay<String> = BehaviorRelay(value: "")
+    let weatherModelStream : BehaviorRelay<Weather?> = BehaviorRelay(value: nil)
     let loadingStream : BehaviorRelay<Bool> = BehaviorRelay(value: false)
     let fetchWeather : BehaviorRelay<String> = BehaviorRelay(value: "")
-    let descriptionLabelStream : BehaviorRelay<String> = BehaviorRelay(value: "")
     
     let usecase : UseCaseProtocol = UseCase()
     let disposeBag = DisposeBag()
@@ -39,17 +33,14 @@ class ViewModel{
 
 extension ViewModel {
     func bindSignal() {
-        usecase.getWeatherStream().map{$0.city}.bind(to: cityLabelTextStream).disposed(by: disposeBag)
-        usecase.getWeatherStream().map{"天气:\($0.weather)"}.bind(to: weatherLabelTextStream).disposed(by: disposeBag)
-        usecase.getWeatherStream().map{"\($0.temperature)"}.bind(to: temperatureLabelTextStream).disposed(by: disposeBag)
-        usecase.getWeatherStream().map{"\($0.des)"}.bind(to: descriptionLabelStream).disposed(by: disposeBag)
+        usecase.getWeatherStream().bind(to: weatherModelStream).disposed(by: disposeBag)
         usecase.getWeatherLoadingStream().bind(to: loadingStream).disposed(by: disposeBag)
     }
 }
 
 extension ViewModel : ViewModelProtocol {
-    func getDescriptionLabelStream() -> Observable<String> {
-        return descriptionLabelStream.asObservable()
+    func getWeatherModelStream() -> Observable<Weather?> {
+        return weatherModelStream.asObservable()
     }
     
     func fetchWeather(city: String) {
@@ -60,16 +51,5 @@ extension ViewModel : ViewModelProtocol {
         return loadingStream.asObservable()
     }
     
-    func getWeatherlableTextStream() -> Observable<String> {
-        return weatherLabelTextStream.asObservable()
-    }
-    
-    func getCityLabelTextStream() -> Observable<String> {
-        return cityLabelTextStream.asObservable()
-    }
-    
-    func getTemperatureLabelStream() -> Observable<String> {
-        return temperatureLabelTextStream.asObservable()
-    }
 }
 
