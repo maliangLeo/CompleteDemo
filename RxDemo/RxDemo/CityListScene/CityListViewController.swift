@@ -34,7 +34,7 @@ class CityListViewController: UIViewController {
             let vc = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
             vc.city = item
             self?.navigationController?.pushViewController(vc, animated: true)
-        })
+            }).disposed(by: disposeBag)
         
         // Do any additional setup after loading the view.
     }
