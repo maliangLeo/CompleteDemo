@@ -18,7 +18,7 @@ struct Weather {
 }
 
 protocol UseCaseProtocol {
-    func getWeatherStream() -> Observable<Weather>
+    func getWeatherStream() -> Observable<Weather?>
     func getWeatherLoadingStream() -> Observable<Bool>
     func fetchWeather(city:String)
 }
@@ -28,13 +28,12 @@ class UseCase {
     let disposeBag = DisposeBag()
     let weatherRequestLoadingStream : BehaviorRelay<Bool> = BehaviorRelay(value: false)
     let weatherRequestErrorStream : BehaviorRelay<Error?> = BehaviorRelay(value: nil)
-    let weatherStream : BehaviorRelay<Weather>
+    let weatherStream : BehaviorRelay<Weather?>
     
-    let wea = Weather(city: "", weather: "", temperature: "",des: "")
     
     init() {
         
-        weatherStream = BehaviorRelay(value: wea)
+        weatherStream = BehaviorRelay(value: nil)
         
     }
     
@@ -72,7 +71,7 @@ extension UseCase : UseCaseProtocol {
     }
     
     
-    func getWeatherStream() -> Observable<Weather> {
+    func getWeatherStream() -> Observable<Weather?> {
         return weatherStream.asObservable()
     }
 }
