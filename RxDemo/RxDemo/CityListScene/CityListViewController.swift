@@ -14,31 +14,38 @@ class CityListViewController: UIViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
-    let disposeBag = DisposeBag()
+    
+    private let viewModel : CityListViewModelProtocol & UITableViewDataSource = CityListViewModel()
+    private let disposeBag = DisposeBag()
+    private var models : Array<String> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-        tableView.tableFooterView = UIView()
+        configTableView()
+        bindViewModel()
         
-        let obs = Observable.just(["大连","北京","广州","乌鲁木齐","长沙","武汉"])
-        obs.bind(to: tableView.rx.items){(tableView,row,element) in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell")!
-            cell.textLabel?.text = element
-            return cell
-        }.disposed(by: disposeBag)
-        
-        tableView.rx.modelSelected(String.self).subscribe(onNext:{[weak self] item in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-            vc.city = item
-            self?.navigationController?.pushViewController(vc, animated: true)
-            }).disposed(by: disposeBag)
-        
-        // Do any additional setup after loading the view.
     }
     
+    private func configTableView() {
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        tableView.tableFooterView = UIView()
+        tableView.dataSource = viewModel
+        tableView.delegate = self
+    }
     
+    private func bindViewModel() {
+        viewModel.getBlockListStream().subscribe().disposed(by: disposeBag)
+    }
     
+}
+
+extension CityListViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let city = viewModel.getSelectCity(at: indexPath)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        vc.city = city
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
