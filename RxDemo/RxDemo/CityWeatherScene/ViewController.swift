@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var desLabel: UILabel!
     
     private let disposeBag = DisposeBag()
-    private var viewmodel : ViewModelProtocol = ViewModel()
+    private let viewmodel : ViewModelProtocol = ViewModel()
     
     public var city : String?
     

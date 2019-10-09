@@ -13,7 +13,7 @@ import RxSwift
 
 protocol CityListViewModelProtocol {
     func getBlockListStream() -> Observable<[String]>
-    func getSelectCity(at indexPath:IndexPath) -> String
+    func getSelectCityStream(at indexPath:IndexPath) -> String
 }
 
 class CityListViewModel: NSObject {
@@ -22,14 +22,12 @@ class CityListViewModel: NSObject {
 }
 
 extension CityListViewModel : CityListViewModelProtocol {
-    func getSelectCity(at indexPath: IndexPath) -> String {
+    func getSelectCityStream(at indexPath: IndexPath) -> String {
         return useCase.getCity(at: indexPath.row)
     }
     
     func getBlockListStream() -> Observable<[String]> {
-        return useCase.getListDataSourceStream().map{(model)-> [String] in
-            return model
-        }.do(onNext:{[weak self] (cellData) in
+        return useCase.getListDataSourceStream().do(onNext:{[weak self] (cellData) in
             self?.cellData.accept(cellData)
         })
     }

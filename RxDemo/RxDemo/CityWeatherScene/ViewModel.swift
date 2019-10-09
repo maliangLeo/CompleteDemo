@@ -23,16 +23,16 @@ protocol ViewModelProtocol {
 
 class ViewModel{
     
-    let weatherCityStream : BehaviorRelay<String> = BehaviorRelay(value: "")
-    let weatherTemperatureStream : BehaviorRelay<String> = BehaviorRelay(value: "")
-    let weatherStream : BehaviorRelay<String> = BehaviorRelay(value: "")
-    let weatherDescriptionStream : BehaviorRelay<String> = BehaviorRelay(value: "")
+    private let weatherCityStream : BehaviorRelay<String> = BehaviorRelay(value: "")
+    private let weatherTemperatureStream : BehaviorRelay<String> = BehaviorRelay(value: "")
+    private let weatherStream : BehaviorRelay<String> = BehaviorRelay(value: "")
+    private let weatherDescriptionStream : BehaviorRelay<String> = BehaviorRelay(value: "")
     
-    let loadingStream : BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    let fetchWeather : BehaviorRelay<String> = BehaviorRelay(value: "")
+    private let loadingStream : BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    private let fetchWeather : BehaviorRelay<String> = BehaviorRelay(value: "")
     
-    let usecase : UseCaseProtocol = UseCase()
-    let disposeBag = DisposeBag()
+    private let usecase : UseCaseProtocol = UseCase()
+    private let disposeBag = DisposeBag()
     
     init() {
         bindSignal()

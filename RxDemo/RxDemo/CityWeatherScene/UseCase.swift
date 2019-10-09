@@ -25,11 +25,10 @@ protocol UseCaseProtocol {
 
 class UseCase {
     
-    let disposeBag = DisposeBag()
-    let weatherRequestLoadingStream : BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    let weatherRequestErrorStream : BehaviorRelay<Error?> = BehaviorRelay(value: nil)
-    let weatherStream : BehaviorRelay<Weather?>
-    
+    private let disposeBag = DisposeBag()
+    private let weatherRequestLoadingStream : BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    private let weatherRequestErrorStream : BehaviorRelay<Error?> = BehaviorRelay(value: nil)
+    private let weatherStream : BehaviorRelay<Weather?>
     
     init() {
         

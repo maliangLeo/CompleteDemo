@@ -17,7 +17,6 @@ class CityListViewController: UIViewController {
     
     private let viewModel : CityListViewModelProtocol & UITableViewDataSource = CityListViewModel()
     private let disposeBag = DisposeBag()
-    private var models : Array<String> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +41,7 @@ class CityListViewController: UIViewController {
 
 extension CityListViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let city = viewModel.getSelectCity(at: indexPath)
+        let city = viewModel.getSelectCityStream(at: indexPath)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
         vc.city = city
