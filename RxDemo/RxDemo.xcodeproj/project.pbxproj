@@ -10,6 +10,8 @@
 		35CB4B3CC1AB9F0BF3B1A461 /* Pods_RxDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B3D37160B23F46361EC3EB /* Pods_RxDemo.framework */; };
 		BF24257E234C399A00618310 /* CityListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF24257D234C399A00618310 /* CityListUseCase.swift */; };
 		BF242580234C39B400618310 /* CityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF24257F234C39B400618310 /* CityListViewModel.swift */; };
+		BFD5AB52234DC06F00BC7CBC /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD5AB51234DC06F00BC7CBC /* Alamofire.framework */; };
+		BFD5AB54234ECAF000BC7CBC /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5AB53234ECAF000BC7CBC /* Weather.swift */; };
 		BFE48719233B420000F7B288 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE48718233B420000F7B288 /* ViewModel.swift */; };
 		BFE4871B233B43A600F7B288 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE4871A233B43A600F7B288 /* UseCase.swift */; };
 		BFE4871E233C481400F7B288 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE4871D233C481400F7B288 /* WeatherAPI.swift */; };
@@ -46,6 +48,13 @@
 		9AE03E1EA0A1BE6D4F22B48E /* Pods-RxDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxDemo.release.xcconfig"; path = "Target Support Files/Pods-RxDemo/Pods-RxDemo.release.xcconfig"; sourceTree = "<group>"; };
 		BF24257D234C399A00618310 /* CityListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListUseCase.swift; sourceTree = "<group>"; };
 		BF24257F234C39B400618310 /* CityListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListViewModel.swift; sourceTree = "<group>"; };
+		BFD5AB51234DC06F00BC7CBC /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
+		BFD5AB53234ECAF000BC7CBC /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		BFD5AB71234ED51E00BC7CBC /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD5AB75234ED5AD00BC7CBC /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD5AB79234ED5C900BC7CBC /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD5AB7D234ED5D500BC7CBC /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD5AB81234ED5E900BC7CBC /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFE48718233B420000F7B288 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		BFE4871A233B43A600F7B288 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		BFE4871D233C481400F7B288 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
@@ -71,6 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35CB4B3CC1AB9F0BF3B1A461 /* Pods_RxDemo.framework in Frameworks */,
+				BFD5AB52234DC06F00BC7CBC /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +104,11 @@
 		13418DA8D5F8A2165C28CEC5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFD5AB81234ED5E900BC7CBC /* AlamofireObjectMapper.framework */,
+				BFD5AB7D234ED5D500BC7CBC /* AlamofireObjectMapper.framework */,
+				BFD5AB79234ED5C900BC7CBC /* AlamofireObjectMapper.framework */,
+				BFD5AB75234ED5AD00BC7CBC /* AlamofireObjectMapper.framework */,
+				BFD5AB71234ED51E00BC7CBC /* AlamofireObjectMapper.framework */,
 				95B3D37160B23F46361EC3EB /* Pods_RxDemo.framework */,
 			);
 			name = Frameworks;
@@ -106,6 +121,22 @@
 				9AE03E1EA0A1BE6D4F22B48E /* Pods-RxDemo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BFD5AB50234DBFDF00BC7CBC /* Carthage */ = {
+			isa = PBXGroup;
+			children = (
+				BFD5AB51234DC06F00BC7CBC /* Alamofire.framework */,
+			);
+			path = Carthage;
+			sourceTree = "<group>";
+		};
+		BFD5ABBA234F1A9000BC7CBC /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				BFD5AB53234ECAF000BC7CBC /* Weather.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		BFE4871C233C470F00F7B288 /* APIManager */ = {
@@ -161,6 +192,8 @@
 		BFFB2C47233482BC00D39300 /* RxDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BFD5ABBA234F1A9000BC7CBC /* Entity */,
+				BFD5AB50234DBFDF00BC7CBC /* Carthage */,
 				BFE48720233D9B1600F7B288 /* CityWeatherScene */,
 				BFE4871F233D9B0100F7B288 /* CityListScene */,
 				BFE4871C233C470F00F7B288 /* APIManager */,
@@ -203,6 +236,7 @@
 				BFFB2C42233482BC00D39300 /* Frameworks */,
 				BFFB2C43233482BC00D39300 /* Resources */,
 				15EBF167621AF37BB8D56034 /* [CP] Embed Pods Frameworks */,
+				BFD5AB4F234DBE6000BC7CBC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -359,6 +393,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BFD5AB4F234DBE6000BC7CBC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/Carthage copy-frameworks\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -370,6 +421,7 @@
 				BFE4871B233B43A600F7B288 /* UseCase.swift in Sources */,
 				BF24257E234C399A00618310 /* CityListUseCase.swift in Sources */,
 				BF242580234C39B400618310 /* CityListViewModel.swift in Sources */,
+				BFD5AB54234ECAF000BC7CBC /* Weather.swift in Sources */,
 				BFE4871E233C481400F7B288 /* WeatherAPI.swift in Sources */,
 				BFE48719233B420000F7B288 /* ViewModel.swift in Sources */,
 				BFFB2C49233482BC00D39300 /* AppDelegate.swift in Sources */,
@@ -550,6 +602,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Moya\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PKHUD\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Result\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxRelay\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RxDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -568,6 +632,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Moya\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PKHUD\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Result\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxRelay\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RxDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

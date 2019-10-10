@@ -30,13 +30,12 @@ class ViewController: UIViewController {
         
     }
     
-    
     func bindTextSignal() {
         viewmodel.fetchWeather(city: city!)
-        viewmodel.getWeatherCityStream().bind(to: cityLabel.rx.text).disposed(by: disposeBag)
-        viewmodel.getWeatherTemperatureStream().bind(to: temperatureLabel.rx.text).disposed(by: disposeBag)
-        viewmodel.getWeatherStream().bind(to: weatherLabel.rx.text).disposed(by: disposeBag)
-        viewmodel.getWeatherDescriptionStream().bind(to: desLabel.rx.text).disposed(by: disposeBag)
+        viewmodel.getCityLabelTextStream().bind(to: cityLabel.rx.text).disposed(by: disposeBag)
+        viewmodel.getTemperatureLabelTextStream().bind(to: temperatureLabel.rx.text).disposed(by: disposeBag)
+        viewmodel.getWeatherLabelTextStream().bind(to: weatherLabel.rx.text).disposed(by: disposeBag)
+        viewmodel.getDesLabelTextStream().bind(to: desLabel.rx.text).disposed(by: disposeBag)
         
         viewmodel.getLoadingStream().subscribe(onNext: {[weak self](result) in
             if (result) {
@@ -46,6 +45,11 @@ class ViewController: UIViewController {
             }
         }).disposed(by: disposeBag)
         
+        viewmodel.getErrorStream().asDriver(onErrorJustReturn: nil).drive(onNext:{(error) in
+            if (error != nil) {
+                HUD.flash(.error, delay: 2.0)
+            }
+        }).disposed(by: disposeBag)
     }
     
 }

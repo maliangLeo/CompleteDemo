@@ -10,16 +10,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-struct Weather {
-    let city : String
-    let weather : String
-    let temperature : String
-    let des : String
-}
 
 protocol UseCaseProtocol {
     func getWeatherStream() -> Observable<Weather?>
     func getWeatherLoadingStream() -> Observable<Bool>
+    func requestWeatherErrorStream() -> Observable<Error?>
+    
     func fetchWeather(city:String)
 }
 
@@ -28,11 +24,9 @@ class UseCase {
     private let disposeBag = DisposeBag()
     private let weatherRequestLoadingStream : BehaviorRelay<Bool> = BehaviorRelay(value: false)
     private let weatherRequestErrorStream : BehaviorRelay<Error?> = BehaviorRelay(value: nil)
-    private let weatherStream : BehaviorRelay<Weather?>
+    private let weatherStream : BehaviorRelay<Weather?> = BehaviorRelay(value: nil)
     
     init() {
-        
-        weatherStream = BehaviorRelay(value: nil)
         
     }
     
@@ -40,35 +34,37 @@ class UseCase {
 
 extension UseCase : UseCaseProtocol {
     func fetchWeather(city:String) {
+        
         weatherRequestLoadingStream.accept(true)
+        
         weatherProvider.rx.request(.getByCity(city))
-            .subscribe{ [weak self] event in
-            switch event {
-            case let .success(response):
-                //数据处理
-                self?.weatherRequestLoadingStream.accept(false)
-                self?.weatherRequestErrorStream.accept(nil)
+        .subscribe(onSuccess: { [weak self](response) in
+            self?.weatherRequestLoadingStream.accept(false)
+            self?.weatherRequestErrorStream.accept(nil)
+            
+            do {
+                let wea = try JSONDecoder().decode(WeatherResult.self, from: response.data)
+                self?.weatherStream.accept(wea.result.today)
+            }catch {
                 
-                let dict = try? response.mapJSON() as? [String:Any]
-                
-                let today: [String: AnyObject] = ((dict?["result"]) as! [String: AnyObject])["today"] as! [String:AnyObject]
-                let wea = today["weather"] as! String
-                let temp = today["temperature"] as! String
-                let description = today["dressing_advice"] as! String
-                self?.weatherStream.accept(Weather(city: city, weather: wea, temperature: temp, des: description))
-                
-            case let .error(error):
-                self?.weatherRequestLoadingStream.accept(false)
-                self?.weatherRequestErrorStream.accept(error)
+                print("======json error\(error)=======")
             }
+            
+        }) { [weak self](error) in
+            self?.weatherRequestLoadingStream.accept(false)
+            self?.weatherRequestErrorStream.accept(error)
         }
         .disposed(by: disposeBag)
+        
     }
     
     func getWeatherLoadingStream() -> Observable<Bool> {
         return weatherRequestLoadingStream.asObservable()
     }
     
+    func requestWeatherErrorStream() -> Observable<Error?> {
+        return weatherRequestErrorStream.asObservable()
+    }
     
     func getWeatherStream() -> Observable<Weather?> {
         return weatherStream.asObservable()
