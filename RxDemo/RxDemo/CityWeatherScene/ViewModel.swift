@@ -25,6 +25,8 @@ protocol ViewModelProtocol {
 
 class ViewModel{
     
+    private let isLoadingStream : BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    private let isErrorStream : BehaviorRelay<Error?> = BehaviorRelay(value: nil)
     private let weatherCityStream : BehaviorRelay<String> = BehaviorRelay(value: "")
     private let weatherTemperatureStream : BehaviorRelay<String> = BehaviorRelay(value: "")
     private let weatherStream : BehaviorRelay<String> = BehaviorRelay(value: "")
@@ -50,6 +52,14 @@ extension ViewModel {
         usecase.getWeatherStream().map{($0?.dressingAdvice ?? "None")}.bind(to: weatherDescriptionStream).disposed(by: disposeBag)
         usecase.getHometownWeatherStream().map{("家乡:\($0?.city ?? "None")")}.bind(to: homeCityStream).disposed(by: disposeBag)
         usecase.getHometownWeatherStream().map{("温度:\($0?.temperature ?? "None")")}.bind(to: homeTemperatureWeatherStream).disposed(by: disposeBag)
+        Observable.combineLatest(usecase.getWeatherLoadingStream(), usecase.getHomeWeatherLoadingStream())
+            .map({$0 && $1})
+            .bind(to: isLoadingStream)
+            .disposed(by: disposeBag)
+        Observable.combineLatest(usecase.requestWeatherErrorStream(), usecase.requestHomeWeatherErrorStream())
+            .map({$0 ?? $1})
+            .bind(to: isErrorStream)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -83,11 +93,11 @@ extension ViewModel : ViewModelProtocol {
     }
     
     func getLoadingStream() -> Observable<Bool> {
-        return Observable.combineLatest(usecase.getWeatherLoadingStream(), usecase.getHomeWeatherLoadingStream()).map({$0 && $1})
+        return isLoadingStream.asObservable()
     }
     
     func getErrorStream() -> Observable<Error?> {
-        return Observable.combineLatest(usecase.requestHomeWeatherErrorStream(), usecase.requestWeatherErrorStream()).map({$0 ?? $1})
+        return isErrorStream.asObservable()
     }
 }
 
