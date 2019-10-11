@@ -56,16 +56,40 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="锦州" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ko-JX-p5H">
+                                <rect key="frame" x="107" y="775" width="200" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="cw4-Ol-PVz"/>
+                                    <constraint firstAttribute="height" constant="22" id="pEh-Wo-ayA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="天气" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIL-JY-Iiw">
+                                <rect key="frame" x="107" y="827" width="200" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="Ehd-8w-C6j"/>
+                                    <constraint firstAttribute="width" constant="200" id="OHh-Zq-K97"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="E5H-k4-Pe9" firstAttribute="top" secondItem="mEy-1S-xrl" secondAttribute="bottom" constant="61" id="7x8-I5-rJH"/>
+                            <constraint firstItem="kIL-JY-Iiw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DYI-ab-Tud"/>
                             <constraint firstItem="8vG-Lv-FvF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Fl4-fK-T6d"/>
                             <constraint firstItem="RaJ-Bq-7up" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-303" id="IIw-fH-ooh"/>
                             <constraint firstItem="E5H-k4-Pe9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="URP-uc-Jn8"/>
+                            <constraint firstItem="6Ko-JX-p5H" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZKo-Ke-Ljc"/>
                             <constraint firstItem="8vG-Lv-FvF" firstAttribute="top" secondItem="RaJ-Bq-7up" secondAttribute="bottom" constant="61" id="boh-5c-EfK"/>
+                            <constraint firstItem="kIL-JY-Iiw" firstAttribute="top" secondItem="6Ko-JX-p5H" secondAttribute="bottom" constant="30" id="ijZ-B4-d7G"/>
                             <constraint firstItem="RaJ-Bq-7up" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jFI-2B-uoT"/>
                             <constraint firstItem="mEy-1S-xrl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="n7D-kq-WCN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kIL-JY-Iiw" secondAttribute="bottom" constant="13" id="pVb-wg-j2X"/>
                             <constraint firstItem="mEy-1S-xrl" firstAttribute="top" secondItem="8vG-Lv-FvF" secondAttribute="bottom" constant="61" id="xuh-9n-nr7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -73,6 +97,8 @@
                     <connections>
                         <outlet property="cityLabel" destination="RaJ-Bq-7up" id="rYE-Ai-dLI"/>
                         <outlet property="desLabel" destination="E5H-k4-Pe9" id="Vr8-X4-eMO"/>
+                        <outlet property="homeTownLabel" destination="6Ko-JX-p5H" id="fsf-Lz-U0M"/>
+                        <outlet property="homeTownWeatherLabel" destination="kIL-JY-Iiw" id="mrP-3D-R1j"/>
                         <outlet property="temperatureLabel" destination="8vG-Lv-FvF" id="j6b-ru-nW2"/>
                         <outlet property="weatherLabel" destination="mEy-1S-xrl" id="dGA-Cp-gjD"/>
                     </connections>

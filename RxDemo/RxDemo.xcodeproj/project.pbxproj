@@ -161,8 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				BFE4871A233B43A600F7B288 /* UseCase.swift */,
-				BFFB2C4A233482BC00D39300 /* ViewController.swift */,
 				BFE48718233B420000F7B288 /* ViewModel.swift */,
+				BFFB2C4A233482BC00D39300 /* ViewController.swift */,
 			);
 			path = CityWeatherScene;
 			sourceTree = "<group>";

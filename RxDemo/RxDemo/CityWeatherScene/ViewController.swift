@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var desLabel: UILabel!
+    @IBOutlet weak var homeTownLabel: UILabel!
+    @IBOutlet weak var homeTownWeatherLabel: UILabel!
     
     private let disposeBag = DisposeBag()
     private let viewmodel : ViewModelProtocol = ViewModel()
@@ -36,6 +38,8 @@ class ViewController: UIViewController {
         viewmodel.getTemperatureLabelTextStream().bind(to: temperatureLabel.rx.text).disposed(by: disposeBag)
         viewmodel.getWeatherLabelTextStream().bind(to: weatherLabel.rx.text).disposed(by: disposeBag)
         viewmodel.getDesLabelTextStream().bind(to: desLabel.rx.text).disposed(by: disposeBag)
+        viewmodel.getHomeTownLabelTextStream().bind(to: homeTownLabel.rx.text).disposed(by: disposeBag)
+        viewmodel.getHomeTownWeatherLabelTextStream().bind(to: homeTownWeatherLabel.rx.text).disposed(by: disposeBag)
         
         viewmodel.getLoadingStream().subscribe(onNext: {[weak self](result) in
             if (result) {
